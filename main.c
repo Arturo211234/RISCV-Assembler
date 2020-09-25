@@ -97,11 +97,13 @@ int main(int argc, char *argv[]){
        break;
       case 4:
        state = PUSH;
+       argcount = 0;
        break;
     }
     break;
   case PUSH:
-    fwrite(&instruction, 4, 1, output); 
+    fwrite(&instruction, 4, 1, output);
+    state = SHIFT
     break;
  }
  
