@@ -78,16 +78,13 @@ int argcount = 0;
 size_t getArgStartIndex(size_t current, char *the_buffer){
  size_t loopcount = current;
  while(1){
-  if(the_buffer[loopcount] == 0){
-   exit(1);
-  }
   if(the_buffer[loopcount] == 10){
    curr_line++;
   }
-  if((the_buffer[loopcount] >= 48 && the_buffer[loopcount] <= 57) || (the_buffer[loopcount] >= 65 && the_buffer[loopcount] <= 90)){
+  if(the_buffer[loopcount] >= 48 && the_buffer[loopcount] <= 90){
    return loopcount;
   }
-  loopcount++;
+  loopcount+=1;
  }
 }
 
@@ -101,6 +98,7 @@ size_t getArgEndIndex(size_t current, char *the_buffer){
    curr_line++;
   }
   if(the_buffer[loopcount] == 10 || the_buffer[loopcount] == 9 || the_buffer[loopcount] == 32 || the_buffer[loopcount] == 0 || the_buffer[loopcount] == 44){
+   printf("\nend: %ld\n", loopcount - 1);
    return loopcount - 1;
   }
   loopcount++;
@@ -117,6 +115,7 @@ int32_t tenExp(size_t power){
 
 
 int32_t interpretArgument(char *argument){
+ printf("Argument: %s\n", argument);
  size_t loopcount = 0;
  int32_t retval = 0;
  if(argument[0] == 120){
@@ -128,10 +127,16 @@ int32_t interpretArgument(char *argument){
  }
  while(1){
    if(argument[loopcount] == 0){
+    argcount++;
+    printf("argcount: %d\n", argcount);
     return retval;
    }
+   printf("argument[loopcount] = %d\n", argument[loopcount]);
    retval += (argument[loopcount] - 48) * tenExp(loopcount);
+   loopcount++;
  }
+ 
+
 }
 
 
@@ -141,7 +146,7 @@ uint8_t getInstructionType(char *instruction){
   if(i == 38 || i == 39){
    argcount = 4;
   } else if(i == 0 || i == 1 || i == 2){
-   argcount += 2;
+   argcount = 2;
   } else {
    argcount++;
   }
@@ -149,8 +154,7 @@ uint8_t getInstructionType(char *instruction){
   return i;
   }
  }
- printf("Invalid instruction at line #%ld", curr_line);
+ printf("Invalid instruction \"%s\" at line #%ld", instruction, curr_line);
  exit(1);
 }
-
 
