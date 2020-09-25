@@ -103,7 +103,7 @@ int main(int argc, char *argv[]){
     break;
   case PUSH:
     fwrite(&instruction, 4, 1, output);
-    state = SHIFT
+    state = SHIFT;
     break;
  }
  
