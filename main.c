@@ -40,6 +40,7 @@ int main(int argc, char *argv[]){
  
  size_t start, end;
  char currentString[10];
+ while(current_index < filesize){
  switch(state){
   case SHIFT:
     switch(argcount){
@@ -62,7 +63,8 @@ int main(int argc, char *argv[]){
        for(unsigned long i = 0; i <= (end - start); i++){
         currentString[i] = buffer[start + i];
        }
-       current_index = end+1;
+       current_index = end+2;
+       printf("current_index: %ld\n", current_index);
        currentString[end+1] = 0;
        curr_inst.arg1 = interpretArgument(currentString);
        for(int i = 0; i < 10; i++){
@@ -74,8 +76,10 @@ int main(int argc, char *argv[]){
        end = getArgEndIndex(current_index, buffer);
        for(unsigned long i = 0; i <= (end - start); i++){
         currentString[i] = buffer[start + i];
+        printf("currentString: %s\n", currentString);
        }
-       current_index = end+1;
+       current_index = end+2;
+       printf("current_index: %ld\n", current_index);
        currentString[end+1] = 0;
        curr_inst.arg2 = interpretArgument(currentString);
        for(int i = 0; i < 10; i++){
@@ -88,7 +92,8 @@ int main(int argc, char *argv[]){
        for(unsigned long i = 0; i <= (end - start); i++){
         currentString[i] = buffer[start + i];
        }
-       current_index = end+1;
+       current_index = end+2;
+       printf("current_index: %ld\n", current_index);
        currentString[end+1] = 0;
        curr_inst.arg3 = interpretArgument(currentString);
        for(int i = 0; i < 10; i++){
@@ -106,6 +111,6 @@ int main(int argc, char *argv[]){
     state = SHIFT;
     break;
  }
- 
+} 
  return 0; 
 }
