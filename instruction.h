@@ -1,7 +1,9 @@
 uint32_t instruction;
 
 void LUI(int32_t arg1, int32_t arg2, int32_t arg3){
- 
+ instruction += 0x37;
+ instruction += (arg2 & 0x7F) << 6;
+ instruction += (arg3 & 0xFFFFF) << 11;
 } 
 void AUIPC(int32_t arg1, int32_t arg2, int32_t arg3){
 
