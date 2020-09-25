@@ -97,8 +97,9 @@ int main(int argc, char *argv[]){
        break;
       case 4:
        state = PUSH;
+       break;
     }
-        break;
+    break;
   case PUSH:
     fwrite(&instruction, 4, 1, output); 
     break;
